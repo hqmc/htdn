@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Phiếu yêu cầu hỗ trợ - Hải quan CKQT Móng Cái</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Phiếu yêu cầu hỗ trợ doanh nghiệp - Chi cục Hải quan cửa khẩu quốc tế Móng Cái">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Logo Hải quan (favicon ở thư mục cha) -->
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background: #f5f5f5;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    /* Màn hình loading khi iframe đang tải */
+    #loading {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
+      z-index: 9999;
+      transition: opacity 0.4s ease;
+    }
+    #loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Logo Hải quan: nhịp đập nhẹ + bóng đổ xanh tạo cảm giác glow */
+    .logo {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      filter: drop-shadow(0 6px 18px rgba(9, 105, 218, 0.28));
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.07); }
+    }
+
+    .loading-text {
+      margin-top: 26px;
+      color: #57606a;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+
+    /* 3 dấu chấm hiện tuần tự kiểu typing */
+    .dot {
+      display: inline-block;
+      opacity: 0;
+      animation: dot-fade 1.4s infinite;
+    }
+    .dot:nth-child(1) { animation-delay: 0s;   }
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes dot-fade {
+      0%, 70%, 100% { opacity: 0; }
+      30%, 60%      { opacity: 1; }
+    }
+
+    /* Iframe form full-screen */
+    iframe {
+      border: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Nút "Mở trong tab mới" - fallback nếu DN gặp vấn đề upload file trong iframe */
+    #openExternal {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      padding: 10px 16px;
+      background: rgba(9, 105, 218, 0.95);
+      color: #fff;
+      border: 0;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      z-index: 100;
+      transition: background 0.2s ease;
+    }
+    #openExternal:hover {
+      background: rgba(9, 105, 218, 1);
+    }
+    #openExternal::before {
+      content: "↗";
+      margin-right: 6px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="loading">
+    <img class="logo" src="../favicon.ico" alt="Logo Hải quan">
+    <div class="loading-text">
+      Đang tải phiếu yêu cầu<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+    </div>
+  </div>
+
+  <!-- Tham số ?embedded=true giúp Google Form rút gọn header/footer khi nhúng -->
+  <iframe
+    id="form"
+    src="https://docs.google.com/forms/d/e/DAN_URL_GOOGLE_FORM_VAO_DAY/viewform?embedded=true"
+    allow="clipboard-write"
+    onload="document.getElementById('loading').classList.add('hidden')">
+    Đang tải...
+  </iframe>
+
+  <!-- Nút mở form trong tab mới - hữu ích khi DN cần đính kèm file (đôi khi vướng cookie iframe) -->
+  <a id="openExternal"
+     href="https://docs.google.com/forms/d/e/DAN_URL_GOOGLE_FORM_VAO_DAY/viewform"
+     target="_blank"
+     rel="noopener"
+     title="Mở form trong tab mới (nên dùng nếu cần đính kèm file)">
+    Mở trong tab mới
+  </a>
+
+  <script>
+    // Phòng trường hợp iframe load lâu, tự ẩn loading sau 8 giây
+    setTimeout(function() {
+      document.getElementById('loading').classList.add('hidden');
+    }, 8000);
+  </script>
+
+</body>
+</html>
